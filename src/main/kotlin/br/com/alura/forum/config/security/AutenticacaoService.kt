@@ -13,7 +13,7 @@ class AutenticacaoService(val usuarioRepository: UsuarioRepository) : UserDetail
         username?.let {
             val usuario = usuarioRepository.findByEmail(it)
             if (usuario != null) {
-                return usuario!!
+                return usuario
             }
         }
         throw UsernameNotFoundException("Dados Invalidos")

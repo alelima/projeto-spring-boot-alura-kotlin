@@ -3,6 +3,7 @@ package br.com.alura.forum.config.security
 import br.com.alura.forum.repository.UsuarioRepository
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import org.springframework.context.annotation.Profile
 import org.springframework.http.HttpMethod
 import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder
@@ -17,6 +18,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 @EnableWebSecurity
 @Configuration
+@Profile("prod")
 class SecurityConfigurations(val autenticacaoService: AutenticacaoService,
                              val tokenService: TokenService,
                              val usuarioRepository: UsuarioRepository) : WebSecurityConfigurerAdapter() {
@@ -41,6 +43,7 @@ class SecurityConfigurations(val autenticacaoService: AutenticacaoService,
                 .antMatchers(HttpMethod.GET, "/topicos/*").permitAll()
                     .antMatchers(HttpMethod.POST, "/auth").permitAll()
                     .antMatchers(HttpMethod.GET, "/actuator/**").permitAll()
+                    .antMatchers(HttpMethod.DELETE, "/topicos/*").hasRole("MODERADOR")
                     .anyRequest().authenticated()
                     .and().csrf().disable()
                     .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
