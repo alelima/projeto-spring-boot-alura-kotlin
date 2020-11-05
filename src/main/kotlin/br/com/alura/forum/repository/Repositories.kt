@@ -12,7 +12,7 @@ interface TopicoRepository : JpaRepository<Topico, Long> {
 }
 
 interface CursoRepository : JpaRepository<Curso, Long> {
-    fun findBynome(nomeCurso: String): Curso
+    fun findByNome(nomeCurso: String): Curso?
 }
 
 interface UsuarioRepository : JpaRepository<Usuario, Long> {

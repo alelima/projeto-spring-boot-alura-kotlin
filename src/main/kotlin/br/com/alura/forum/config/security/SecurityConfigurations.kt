@@ -18,7 +18,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 @EnableWebSecurity
 @Configuration
-@Profile("prod")
+@Profile("prod", "test")
 class SecurityConfigurations(val autenticacaoService: AutenticacaoService,
                              val tokenService: TokenService,
                              val usuarioRepository: UsuarioRepository) : WebSecurityConfigurerAdapter() {

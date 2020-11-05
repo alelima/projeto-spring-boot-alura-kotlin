@@ -14,8 +14,9 @@ class TopicoForm (
         @field:NotNull @field:NotEmpty val nomeCurso: String) {
 
     fun conveter(cursoRepository: CursoRepository): Topico {
-        val curso = cursoRepository.findBynome(nomeCurso)
-        return Topico(titulo, mensagem, curso)
+        val curso = cursoRepository.findByNome(nomeCurso)
+        //TODO: Fazer a checagem de nulo aqui depois
+        return Topico(titulo, mensagem, curso!!)
     }
 }
 
